@@ -1,0 +1,46 @@
+# 构建目录
+/build/
+/out/
+/.vs/
+/.vscode/
+/.idea/
+
+# CMake
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Qt
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# 编译输出
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.obj
+*.o
+
+# 生成的着色器（如有）
+resources/shaders/*.spv
+
+# 临时文件
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# 但保留这些
+!/.gitkeep
+!/resources/shaders/*.glsl
