@@ -1,3 +1,136 @@
+# SimplePointCloudViewer 项目说明
+
+这是一个用来学习 C++ 和 Qt 的小项目。
+我希望通过实现一个简洁的点云查看器，逐步熟悉 Qt 桌面程序开发、OpenGL 渲染、点云文件解析，以及后续 CloudCompare 插件开发的基本流程。
+
+## 项目定位
+
+- 项目名称：`SimplePointCloudViewer`
+- 项目性质：C++ / Qt / 点云可视化学习项目
+- 当前目标：完成一个独立运行的 Qt 点云查看器
+- 后续目标：在理解 CloudCompare 架构后，将功能逐步迁移为插件
+
+## 项目计划
+
+### 阶段一：独立 Qt 点云查看器
+
+#### 功能列表
+
+1. 文件操作
+   - 读取 PCD、PLY、TXT 格式的点云文件
+   - 显示文件基本信息，如点数、包围盒
+2. 3D 可视化
+   - 使用 Qt6 的 `QOpenGLWidget` 渲染点云
+   - 支持鼠标交互：旋转、平移、缩放
+   - 实现基础相机控制
+3. 点云处理
+   - 实现简单的体素下采样
+   - 显示坐标轴
+   - 支持背景色切换
+4. Qt 界面
+   - 主窗口、菜单栏、工具栏
+   - 侧边栏显示点云属性
+   - 状态栏显示运行信息
+
+#### 技术要点
+
+- Qt6 Widgets：`QMainWindow`、`QOpenGLWidget`
+- OpenGL 3.3 Core Profile 点云渲染
+- 信号槽机制与界面交互
+- 文件 I/O 和错误处理
+
+### 阶段二：CloudCompare 插件改造
+
+#### 学习内容
+
+1. CloudCompare 插件架构
+   - 插件接口：`ccPluginInterface`、`ccGLPluginInterface`
+   - 与 CloudCompare 主程序的交互方式
+   - 相关数据结构：`ccPointCloud`、`ccHObject` 等
+2. 代码改造方向
+   - 将独立程序逐步封装为插件
+   - 使用 CloudCompare 的渲染引擎替代自定义 OpenGL
+   - 将功能入口集成到 CloudCompare 菜单或工具栏
+
+## 推荐项目结构
+
+```text
+SimplePointCloudViewer/
+├── CMakeLists.txt
+├── README.md
+├── NOTES.md
+├── src/
+│   ├── main.cpp
+│   ├── MainWindow.cpp/h
+│   ├── GLPointCloudWidget.cpp/h
+│   ├── PointCloud.cpp/h
+│   ├── PointCloudIO.cpp/h
+│   └── PointCloudProcessor.cpp/h
+├── plugin/
+│   ├── CCPlugin.cpp/h
+│   └── CCPluginWidget.cpp/h
+└── resources/
+    ├── shaders/
+    │   ├── vertex.glsl
+    │   └── fragment.glsl
+    └── icons/
+```
+
+## 重点学习模块
+
+| 文件 | 学习内容 |
+| --- | --- |
+| `PointCloud.h` | 点云数据结构定义，例如位置、颜色、法向量 |
+| `PointCloudIO.cpp` | PCD / PLY / TXT 文件格式解析 |
+| `GLPointCloudWidget.cpp` | OpenGL 点云渲染、相机控制、交互逻辑 |
+| `MainWindow.cpp` | Qt 主窗口、菜单栏、工具栏、信号槽连接 |
+| `PointCloudProcessor.cpp` | 体素网格下采样等基础处理算法 |
+| `CCPlugin.cpp` | CloudCompare 插件接口实现 |
+
+## 希望通过这个项目掌握的内容
+
+### Qt 基础
+
+- Qt 项目的 CMake 配置
+- `QMainWindow` 布局管理
+- `QAction`、`QToolBar`、`QMenu` 的使用
+- 信号槽机制
+- 资源文件管理
+
+### Qt 3D 图形
+
+- `QOpenGLWidget` 的使用方法
+- OpenGL 着色器编写
+- VBO / VAO 管理
+- 模型、视图、投影矩阵
+- 鼠标交互与相机控制
+
+### 点云处理
+
+- 点云文件格式解析
+- 点云数据结构设计
+- 体素下采样算法
+- 包围盒与坐标变换
+
+### CloudCompare 插件开发
+
+- CloudCompare 插件接口规范
+- 与 CloudCompare 数据结构的集成方式
+- 插件编译、加载和调试流程
+
+## 后续可扩展方向
+
+1. 增加更多点云格式支持：LAS、E57、XYZ
+2. 增加更多处理功能：统计滤波、平面分割、法线估计
+3. 优化界面体验：QSS、美化主题、交互细节
+4. 优化性能：LOD、八叉树、分块加载
+
+## 参考资料
+
+- CloudCompare: <https://github.com/CloudCompare/CloudCompare>
+- Qt6 官方文档: <https://doc.qt.io/qt-6/>
+- PCL 文档: <https://pointclouds.org/documentation/>
+
 # Qt + CloudCompare 学习笔记
 
 ## 项目：SimplePointCloudViewer
